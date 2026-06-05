@@ -1,24 +1,22 @@
 import streamlit as st
 from rag_pipeline import generate_article
 
-# --- Page Config ---
 st.set_page_config(
     page_title="GenAI Newspaper Article Generator",
     layout="centered"
 )
 
-# --- Header ---
+# Header
 st.title("Newspaper Article Generator")
-st.markdown("*Powered by LangChain, Wikipedia RAG & Google Gemini*")
 st.divider()
 
-# --- Input ---
+# Input
 topic = st.text_input(
     "What topic do you want to generate an article about?",
     placeholder="e.g. Famous singers in Germany, Machine Learning, Dark series,...etc"
 )
 
-# --- Generate Button ---
+# Generate Article Button 
 if st.button("Generate Article", type="primary"):
     if not topic.strip():
         st.warning("Please enter the topic you want first.")
@@ -27,7 +25,7 @@ if st.button("Generate Article", type="primary"):
             try:
                 result = generate_article(topic)
                 
-                # --- Display Article ---
+                # Display the generated article 
                 st.success("Article generated!")
                 st.divider()
                 
@@ -39,7 +37,7 @@ if st.button("Generate Article", type="primary"):
                 
                 st.divider()
                 
-                # Show source context (collapsed)
+                # Show source context 
                 with st.expander("Source context from Wikipedia"):
                     st.write(result["context"])
                     
